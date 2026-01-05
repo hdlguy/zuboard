@@ -1,7 +1,7 @@
 #include "xil_printf.h"
 #include "xparameters.h"
 #include "fpga.h"
-#include "lps22hh.h"
+// #include "lps22hh.h"
 #include "xspips.h"
 #include "xspips_hw.h"
 
@@ -64,8 +64,8 @@ int main()
     uint8_t wdata[100], rdata[100];
 
     // get pointers to fpga and spi controller registers
-    uint32_t *regptr = (uint32_t *)XPAR_M00_AXI_BASEADDR;
-    uint32_t *spiptr = (uint32_t *)XPAR_PSU_SPI_0_BASEADDR;
+    uint32_t *regptr = (uint32_t *)XPAR_REGFILE_CTRL_BASEADDR;
+    uint32_t *spiptr = (uint32_t *)XPAR_SPI1_BASEADDR;
 
     // check fpga ID and VERSION registers
     xil_printf("FPGA_ID = 0x%08x, FPGA_VERSION = 0x%08x\n\r", regptr[FPGA_ID], regptr[FPGA_VERSION]);
