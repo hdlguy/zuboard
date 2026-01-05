@@ -25,25 +25,13 @@ module top (
     input   logic[3:0]      zmod_d_in_n
 );
 
-    logic [39:0]    M00_AXI_araddr;
-    logic [2:0]     M00_AXI_arprot;
-    logic           M00_AXI_arready;
-    logic           M00_AXI_arvalid;
-    logic [39:0]    M00_AXI_awaddr;
-    logic [2:0]     M00_AXI_awprot;
-    logic           M00_AXI_awready;
-    logic           M00_AXI_awvalid;
-    logic           M00_AXI_bready;
-    logic [1:0]     M00_AXI_bresp;
-    logic           M00_AXI_bvalid;
-    logic [31:0]    M00_AXI_rdata;
-    logic           M00_AXI_rready;
-    logic [1:0]     M00_AXI_rresp;
-    logic           M00_AXI_rvalid;
-    logic [31:0]    M00_AXI_wdata;
-    logic           M00_AXI_wready;
-    logic [3:0]     M00_AXI_wstrb;
-    logic           M00_AXI_wvalid;
+    logic [15:0] regfile_addr;       
+    logic regfile_clk;                
+    logic [31:0] regfile_din;         
+    logic [31:0] regfile_dout;        
+    logic regfile_en;                  
+    logic regfile_rst;                
+    logic [3:0] regfile_we;            
 
     logic           axi_aclk;
     logic [0:0]     axi_aresetn;
@@ -57,25 +45,13 @@ module top (
     logic SPI_1_ss_i,  SPI_1_ss_o,  SPI_1_ss_t;
 
     system system_i (
-        .M00_AXI_araddr     (M00_AXI_araddr),
-        .M00_AXI_arprot     (M00_AXI_arprot),
-        .M00_AXI_arready    (M00_AXI_arready),
-        .M00_AXI_arvalid    (M00_AXI_arvalid),
-        .M00_AXI_awaddr     (M00_AXI_awaddr),
-        .M00_AXI_awprot     (M00_AXI_awprot),
-        .M00_AXI_awready    (M00_AXI_awready),
-        .M00_AXI_awvalid    (M00_AXI_awvalid),
-        .M00_AXI_bready     (M00_AXI_bready),
-        .M00_AXI_bresp      (M00_AXI_bresp),
-        .M00_AXI_bvalid     (M00_AXI_bvalid),
-        .M00_AXI_rdata      (M00_AXI_rdata),
-        .M00_AXI_rready     (M00_AXI_rready),
-        .M00_AXI_rresp      (M00_AXI_rresp),
-        .M00_AXI_rvalid     (M00_AXI_rvalid),
-        .M00_AXI_wdata      (M00_AXI_wdata),
-        .M00_AXI_wready     (M00_AXI_wready),
-        .M00_AXI_wstrb      (M00_AXI_wstrb),
-        .M00_AXI_wvalid     (M00_AXI_wvalid),
+        .regfile_addr   (regfile_addr), // output wire [15:0] regfile_addr
+        .regfile_clk    (regfile_clk), // output wire regfile_clk
+        .regfile_din    (regfile_din), // output wire [31:0] regfile_din
+        .regfile_dout   (regfile_dout), // input wire [31:0] regfile_dout
+        .regfile_en     (regfile_en), // output wire regfile_en
+        .regfile_rst    (regfile_rst), // output wire regfile_rst
+        .regfile_we     (regfile_we), // output wire [3:0] regfile_we
         //
         .axi_aclk           (axi_aclk),
         .axi_aresetn        (axi_aresetn),
@@ -118,56 +94,33 @@ module top (
     assign led1_blue  = led_count[25];
     
     
-    // This register file gives software contol over unit under test (UUT).
-    localparam int Nregs = 16;
-    logic [Nregs-1:0][31:0] slv_reg, slv_read;
+    
+    localparam int Naddr = 4;
+    localparam int Nregs = 2**Naddr;
+    localparam logic[Nregs-1:0][31:0] init_reg = 0;
 
-    assign slv_read[0] = 32'hdeadbeef;
-    assign slv_read[1] = 32'h76543210;
-    
-    
-    //assign led1_red   = slv_reg[2][0];
-    //assign led1_green = slv_reg[2][1];
-    //assign led1_blue  = slv_reg[2][2];
-//    assign led2_red   = slv_reg[2][4];
-//    assign led2_green = slv_reg[2][5];
-//    assign led2_blue  = slv_reg[2][6];
-    assign slv_read[2] = slv_reg[2];
-    
-    assign slv_read[Nregs-1:3] = slv_reg[Nregs-1:3];
+    logic[Nregs-1:0][31:0]  reg_val, pul_val, read_val;
+    mem_regfile #(
+       .Naddr       (Naddr),
+       .init_reg    (init_reg)
+    ) uut (
+       .clk         (regfile_clk),
+       .addr        (regfile_addr[Naddr+2-1:2]),
+       .wr_data     (regfile_din),
+       .rd_data     (regfile_dout),
+       .en          (regfile_en),
+       .we          (regfile_we),
+       //
+       .reg_val     (reg_val),
+       .pul_val     (pul_val),
+       .read_val    (read_val)
+    );
 
-	axi_regfile_v1_0_S00_AXI #	(
-		.C_S_AXI_DATA_WIDTH(32),
-		.C_S_AXI_ADDR_WIDTH(6) // 16 32 bit registers.
-	) axi_regfile_inst (
-        // register interface
-        .slv_read(slv_read), 
-        .slv_reg (slv_reg),  
-        // axi interface
-		.S_AXI_ACLK    (axi_aclk),
-		.S_AXI_ARESETN (axi_aresetn),
-        //
-		.S_AXI_ARADDR  (M00_AXI_araddr ),
-		.S_AXI_ARPROT  (M00_AXI_arprot ),
-		.S_AXI_ARREADY (M00_AXI_arready),
-		.S_AXI_ARVALID (M00_AXI_arvalid),
-		.S_AXI_AWADDR  (M00_AXI_awaddr ),
-		.S_AXI_AWPROT  (M00_AXI_awprot ),
-		.S_AXI_AWREADY (M00_AXI_awready),
-		.S_AXI_AWVALID (M00_AXI_awvalid),
-		.S_AXI_BREADY  (M00_AXI_bready ),
-		.S_AXI_BRESP   (M00_AXI_bresp  ),
-		.S_AXI_BVALID  (M00_AXI_bvalid ),
-		.S_AXI_RDATA   (M00_AXI_rdata  ),
-		.S_AXI_RREADY  (M00_AXI_rready ),
-		.S_AXI_RRESP   (M00_AXI_rresp  ),
-		.S_AXI_RVALID  (M00_AXI_rvalid ),
-		.S_AXI_WDATA   (M00_AXI_wdata  ),
-		.S_AXI_WREADY  (M00_AXI_wready ),
-		.S_AXI_WSTRB   (M00_AXI_wstrb  ),
-		.S_AXI_WVALID  (M00_AXI_wvalid )
-	);
+    assign read_val[0] = 32'hdeadbeef;
+    assign read_val[1] = 32'h01234567;
+    assign read_val[Nregs-1:2] = reg_val[Nregs-1:2];
     
+
     logic zmod_rx_clk;
     zmod_test zmod_test_inst (
         .clk(axi_aclk), 

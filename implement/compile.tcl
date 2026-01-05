@@ -25,7 +25,10 @@ report_timing_summary   -file ./results/timing.rpt
 report_utilization      -file ./results/utilization.rpt
 
 set_property BITSTREAM.GENERAL.COMPRESS TRUE [get_designs impl_1]
-write_bitstream -bin_file -force ./results/top.bit
+
+write_bitstream -verbose -force -file ./results/top.bit
+
+write_hw_platform -fixed -include_bit -force -file ./results/top.xsa
 
 close_project
 

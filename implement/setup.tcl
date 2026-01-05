@@ -22,7 +22,8 @@ read_verilog -sv ../source/zmod_test/zmod_txdll.sv
 read_verilog -sv ../source/zmod_test/zmod_rxdll.sv
 read_verilog -sv ../source/zmod_test/zmod_test.sv
 
-read_verilog -sv ../source/axi_regfile/axi_regfile_v1_0_S00_AXI.sv
+#read_verilog -sv ../source/axi_regfile/axi_regfile_v1_0_S00_AXI.sv
+read_verilog -sv ../source/mem_regfile.sv
 read_verilog -sv ../source/top.sv
 
 read_xdc ../source/pins.xdc
