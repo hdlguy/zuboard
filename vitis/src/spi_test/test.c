@@ -1,7 +1,7 @@
 #include "xil_printf.h"
 #include "xparameters.h"
 #include "fpga.h"
-// #include "lps22hh.h"
+#include "lps22hh.h"
 #include "xspips.h"
 #include "xspips_hw.h"
 
@@ -57,7 +57,7 @@ int main()
 {
 
     int rcount;
-    uint32_t rval;
+    //uint32_t rval;
 
     xil_printf("Hello World\n\r");
     

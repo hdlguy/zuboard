@@ -49,6 +49,7 @@ comp = client.create_app_component(
 
 os.system(f"ln -s ../../../src/{app_name}/test.c workspace/{app_name}/src/test.c")
 os.system(f'ln -s ../../../src/fpga.h workspace/{app_name}/src/fpga.h')
+os.system(f'ln -s ../../../src/lps22hh.h workspace/{app_name}/src/lps22hh.h')
 
 status = comp.clean()
 status = platform.build()
