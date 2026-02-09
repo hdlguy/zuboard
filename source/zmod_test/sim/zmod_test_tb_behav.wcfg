@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="zmod_test_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="zmod_test_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="38.997 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="325"></NameColumnWidth>
+      <ValueColumnWidth column_width="93"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="20" />
+   <wvobject type="logic" fp_name="/zmod_test_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/clk_out_p">
+      <obj_property name="ElementShortName">clk_out_p</obj_property>
+      <obj_property name="ObjectShortName">clk_out_p</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/clk_out_n">
+      <obj_property name="ElementShortName">clk_out_n</obj_property>
+      <obj_property name="ObjectShortName">clk_out_n</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/d_out_p">
+      <obj_property name="ElementShortName">d_out_p[3:0]</obj_property>
+      <obj_property name="ObjectShortName">d_out_p[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/d_out_n">
+      <obj_property name="ElementShortName">d_out_n[3:0]</obj_property>
+      <obj_property name="ObjectShortName">d_out_n[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/clk_in_p">
+      <obj_property name="ElementShortName">clk_in_p</obj_property>
+      <obj_property name="ObjectShortName">clk_in_p</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/clk_in_n">
+      <obj_property name="ElementShortName">clk_in_n</obj_property>
+      <obj_property name="ObjectShortName">clk_in_n</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/d_in_p">
+      <obj_property name="ElementShortName">d_in_p[3:0]</obj_property>
+      <obj_property name="ObjectShortName">d_in_p[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/d_in_n">
+      <obj_property name="ElementShortName">d_in_n[3:0]</obj_property>
+      <obj_property name="ObjectShortName">d_in_n[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/clk_period">
+      <obj_property name="ElementShortName">clk_period[63:0]</obj_property>
+      <obj_property name="ObjectShortName">clk_period[63:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider13" type="divider">
+      <obj_property name="label">uut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/clk_in_p">
+      <obj_property name="ElementShortName">clk_in_p</obj_property>
+      <obj_property name="ObjectShortName">clk_in_p</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/rxclk">
+      <obj_property name="ElementShortName">rxclk</obj_property>
+      <obj_property name="ObjectShortName">rxclk</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/rxdivclk">
+      <obj_property name="ElementShortName">rxdivclk</obj_property>
+      <obj_property name="ObjectShortName">rxdivclk</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/rxlocked">
+      <obj_property name="ElementShortName">rxlocked</obj_property>
+      <obj_property name="ObjectShortName">rxlocked</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/uut/shift">
+      <obj_property name="ElementShortName">shift[3:0]</obj_property>
+      <obj_property name="ObjectShortName">shift[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/rxdivclk">
+      <obj_property name="ElementShortName">rxdivclk</obj_property>
+      <obj_property name="ObjectShortName">rxdivclk</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/zmod_test_tb/uut/rx_dout">
+      <obj_property name="ElementShortName">rx_dout[2:0][7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_dout[2:0][7:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/zmod_test_tb/uut/error">
+      <obj_property name="ElementShortName">error</obj_property>
+      <obj_property name="ObjectShortName">error</obj_property>
+   </wvobject>
+</wave_config>
